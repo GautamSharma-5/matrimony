@@ -1,0 +1,24 @@
+# Environment files
+.env
+
+# Composer
+/vendor/
+composer.lock
+
+# User uploads
+/uploads/*
+!/uploads/.gitkeep
+
+# IDE files
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache and logs
+/cache/*
+/logs/*
+!/cache/.gitkeep
+!/logs/.gitkeep

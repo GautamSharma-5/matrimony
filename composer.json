@@ -1,0 +1,15 @@
+{
+    "name": "indianmatrimony/webapp",
+    "description": "Indian Matrimony Website",
+    "type": "project",
+    "require": {
+        "php": ">=7.4",
+        "razorpay/razorpay": "^2.8",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "IndianMatrimony\\": "src/"
+        }
+    }
+}
