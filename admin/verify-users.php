@@ -119,7 +119,7 @@ closeDB($conn);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../includes/admin_header.php'; ?>
 
     <div class="container-fluid py-5">
         <div class="row">

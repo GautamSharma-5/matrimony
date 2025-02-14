@@ -25,7 +25,7 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/matrimony/   logout.php">
+                    <a class="nav-link" href="/matrimony/admin/logout.php">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
                 </li>
