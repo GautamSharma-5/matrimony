@@ -224,7 +224,7 @@ closeDB($conn);
                             </li>
                             <li class="mb-2">
                                 <i class="bi bi-heart me-2"></i>
-                                <strong>Marital Status:</strong> <?php echo htmlspecialchars($profile['marital_status']); ?>
+                                <strong>Marital Status:</strong> <?php echo htmlspecialchars($profile['marital_status'] ?? ''); ?>
                             </li>
                             <?php if ($profile['height']): ?>
                                 <li class="mb-2">

@@ -378,10 +378,11 @@ try {
                                         </div>
                                         
                                         <div class="small text-muted mb-3">
-                                            <div><i class="bi bi-briefcase me-2"></i><?php echo htmlspecialchars($match['occupation']); ?></div>
-                                            <div><i class="bi bi-geo-alt me-2"></i><?php echo htmlspecialchars($match['city'] . ', ' . $match['state']); ?></div>
-                                            <div><i class="bi bi-book me-2"></i><?php echo htmlspecialchars($match['education']); ?></div>
-                                            <div><i class="bi bi-heart me-2"></i><?php echo htmlspecialchars($match['marital_status']); ?></div>
+                                            <div><i class="bi bi-briefcase me-2"></i><?php echo htmlspecialchars($match['occupation'] ?? ''); ?></div>
+                                            <div><i class="bi bi-geo-alt me-2"></i><?php echo htmlspecialchars(($match['city'] ?? '') . ($match['state'] ? ', ' . $match['state'] : '')); ?></div>
+                                            <div><i class="bi bi-book me-2"></i><?php echo htmlspecialchars($match['education'] ?? ''); ?></div>
+                                            <div><i class="bi bi-heart me-2"></i><?php echo htmlspecialchars($match['marital_status'] ?? ''); ?></div>
+                                            <div><i class="bi bi-person me-2"></i><?php echo htmlspecialchars($match['religion'] ?? '') . ($match['caste'] ? ', ' . htmlspecialchars($match['caste']) : ''); ?></div>
                                         </div>
                                         
                                         <div class="d-flex justify-content-between align-items-center">
@@ -408,11 +409,11 @@ try {
 
 <script>
 // Form validation
-(function () {
+(() => {
     'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+    const forms = document.querySelectorAll('.needs-validation')
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
@@ -424,7 +425,25 @@ try {
 
 // Send interest function
 function sendInterest(userId) {
-    // TODO: Implement send interest functionality
-    alert('Interest sending feature coming soon!');
+    fetch('api/send-interest.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `user_id=${userId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Redirect to messages page with the new conversation
+            window.location.href = `messages.php?conversation=${data.conversation_id}`;
+        } else {
+            alert(data.error || 'Failed to send interest. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send interest. Please try again.');
+    });
 }
 </script>

@@ -24,25 +24,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         // Basic user information
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+        $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $is_premium = isset($_POST['is_premium']) ? 1 : 0;
         $is_verified = isset($_POST['is_verified']) ? 1 : 0;
         $is_active = isset($_POST['is_active']) ? 1 : 0;
 
         // Profile information
-        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING);
-        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING);
-        $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
-        $dob = filter_input(INPUT_POST, 'dob', FILTER_SANITIZE_STRING);
-        $religion = filter_input(INPUT_POST, 'religion', FILTER_SANITIZE_STRING);
-        $caste = filter_input(INPUT_POST, 'caste', FILTER_SANITIZE_STRING);
-        $marital_status = filter_input(INPUT_POST, 'marital_status', FILTER_SANITIZE_STRING);
-        $education = filter_input(INPUT_POST, 'education', FILTER_SANITIZE_STRING);
-        $occupation = filter_input(INPUT_POST, 'occupation', FILTER_SANITIZE_STRING);
-        $income = filter_input(INPUT_POST, 'income', FILTER_SANITIZE_STRING);
-        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_STRING);
-        $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_STRING);
-        $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_STRING);
+        $first_name = filter_input(INPUT_POST, 'first_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $last_name = filter_input(INPUT_POST, 'last_name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $dob = filter_input(INPUT_POST, 'dob', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $religion = filter_input(INPUT_POST, 'religion', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $caste = filter_input(INPUT_POST, 'caste', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $marital_status = filter_input(INPUT_POST, 'marital_status', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $education = filter_input(INPUT_POST, 'education', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $occupation = filter_input(INPUT_POST, 'occupation', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $income = filter_input(INPUT_POST, 'income', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $city = filter_input(INPUT_POST, 'city', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $state = filter_input(INPUT_POST, 'state', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $country = filter_input(INPUT_POST, 'country', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Start transaction
         mysqli_begin_transaction($conn);
@@ -185,9 +185,9 @@ try {
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-check">
-                                        <input type="checkbox" name="is_active" class="form-check-input" 
-                                               <?php echo $user['is_active'] ? 'checked' : ''; ?>>
-                                        <label class="form-check-label">Active Account</label>
+                                    <input type="checkbox" name="is_active" class="form-check-input" 
+                                    <?php echo isset($user['is_active']) && $user['is_active'] ? 'checked' : ''; ?>>
+                                    <label class="form-check-label">Active Account</label>
                                     </div>
                                 </div>
                             </div>
@@ -240,12 +240,12 @@ try {
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Religion</label>
                                     <input type="text" name="religion" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['religion']); ?>" required>
+                                           value="<?php echo htmlspecialchars($user['religion'] ?? ''); ?>" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Caste</label>
                                     <input type="text" name="caste" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['caste']); ?>">
+                                    value="<?php echo htmlspecialchars($user['caste'] ?? ''); ?>">
                                 </div>
                             </div>
                         </div>
@@ -261,17 +261,17 @@ try {
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Education</label>
                                     <input type="text" name="education" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['education']); ?>" required>
+                                    value="<?php echo htmlspecialchars($user['education'] ?? ''); ?>" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Occupation</label>
                                     <input type="text" name="occupation" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['occupation']); ?>" required>
+                                           value="<?php echo htmlspecialchars($user['occupation'] ?? ''); ?>">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Income</label>
                                     <input type="text" name="income" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['income']); ?>">
+                                           value="<?php echo htmlspecialchars($user['income'] ?? ''); ?>">
                                 </div>
                             </div>
                         </div>
@@ -287,17 +287,17 @@ try {
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">City</label>
                                     <input type="text" name="city" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['city']); ?>" required>
+                                           value="<?php echo htmlspecialchars($user['city'] ?? ''); ?>" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">State</label>
                                     <input type="text" name="state" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['state']); ?>" required>
+                                           value="<?php echo htmlspecialchars($user['state'] ?? ''); ?>" required>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Country</label>
                                     <input type="text" name="country" class="form-control" 
-                                           value="<?php echo htmlspecialchars($user['country']); ?>" required>
+                                           value="<?php echo htmlspecialchars($user['country'] ?? ''); ?>" required>
                                 </div>
                             </div>
                         </div>

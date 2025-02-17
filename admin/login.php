@@ -11,7 +11,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['admin_role'])) {
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $identifier = filter_input(INPUT_POST, 'identifier', FILTER_SANITIZE_STRING);
+    $identifier = htmlspecialchars(trim($_POST['identifier']));
     $password = $_POST['password'];
     
     if (empty($identifier) || empty($password)) {

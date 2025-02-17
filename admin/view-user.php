@@ -143,7 +143,7 @@ $user['user_updated_at'] = $user['user_updated_at'] ?? date('Y-m-d H:i:s');
                 <div class="profile-header">
                     <div class="row align-items-center">
                         <div class="col-md-2 text-center">
-                            <img src="<?php echo !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : '../assets/images/default-profile.jpg'; ?>" 
+                            <img src="<?php echo !empty($user['profile_picture']) ? htmlspecialchars($user['profile_picture']) : '../uploads/profile_pics/default-profile.jpg'; ?>" 
                                  alt="Profile Picture" class="profile-image mb-3">
                         </div>
                         <div class="col-md-6">
